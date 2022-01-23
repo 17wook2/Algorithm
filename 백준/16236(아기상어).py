@@ -83,34 +83,3 @@ def move():
 move()
 print(answer)
 
-
-
-
-num_list = []
-even_list = []; mul_of_3_list=[]; mul_of_5_list=[];
-
-def get_number():
-    while True:
-        num = input("입력 자료 생성을 위하여 양의 정수를 입력해 주세요!")
-        if num in ['Q','q']:
-            break;
-        num_list.append(int(num))
-
-def classify_number():
-    for i in num_list:
-        if i % 2 == 0:
-            even_list.append(i)
-        elif i % 3 == 0:
-            mul_of_3_list.append(i)
-        elif i % 5 == 0:
-            mul_of_5_list.append(i)
-
-get_number()
-classify_number()
-
-print("짝수" , even_list)
-print("3의 배수", mul_of_3_list)
-print("5의 배수", mul_of_5_list)
-
-
-
