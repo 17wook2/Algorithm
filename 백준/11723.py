@@ -1,26 +1,22 @@
-import sys
-input = sys.stdin.readline
 m = int(input())
-x = 0
+s = 0
 for i in range(m):
-    line = list(input().split())
-    if len(line) == 2:
-        command,idx = line
-        idx = int(idx)
+    command = list(input().split())
+    if len(command) == 2:
+        order, num = command
+        num = int(num)
+        if order == 'add':
+            s |= (1<<num)
+        elif order == 'remove':
+            s &= ~(1<<num)
+        elif order == 'check':
+            if s & (1<<num) == 1: print(1)
+            else: print(0)
+        elif order == 'toggle':
+            s ^= (1<<num)
     else:
-        command = line[0]
-    if command == 'add':
-        x |= (1<<idx)
-    elif command == 'check':
-        if x & (1<<idx) != 0:
-            print(1)
-        else:
-            print(0)
-    elif command == 'remove':
-        x &= ~(1<<idx)
-    elif command == 'toggle':
-        x ^= (1<<idx)
-    elif command == 'all':
-        x = (1<<21) - 1
-    elif command == 'empty':
-        x = 0
+        if command == 'all':
+            s = (1<<21) -1
+        elif command == 'empty':
+            s = 0
+

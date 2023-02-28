@@ -1,27 +1,25 @@
-from itertools import combinations
 import math
+from itertools import combinations
 n = int(input())
-graph = []
+arr = []
 for i in range(n):
-    graph.append(list(map(int,input().split())))
+    arr.append(list(map(int,input().split())))
+def getScore(array):
+    score = 0
+    for i in range(len(array)):
+        for j in range(len(array)):
+            score += arr[array[i]][array[j]]
+    return score
 
-combi = list(combinations(range(n), n//2))
-
-answer = math.inf
-
-def getstat(members):
-    num = 0
-    for member in members:
-        for i in range(n):
-            if i in members:
-                num += graph[member][i]
-    return num
-
+combi = list(combinations([i for i in range(n)], n//2))
+ans = math.inf
 for comb in combi:
-    ateam = getstat(comb)
-    b = [i for i in range(n) if i not in comb]
-    bteam = getstat(b)
-
-    answer = min(answer,abs(ateam - bteam))
-
-print(answer)
+    left = []
+    right = []
+    for i in range(n):
+        if i in comb: left.append(i)
+        else: right.append(i)
+    l_score = getScore(left)
+    r_score = getScore(right)
+    ans = min(ans,abs(l_score-r_score))
+print(ans)

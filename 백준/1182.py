@@ -1,19 +1,16 @@
-from itertools import permutations
 n,s = list(map(int,input().split()))
 arr = list(map(int,input().split()))
-cnt = 0
-visited = [0]*n
-def func(d,k):
-    global cnt
-    if k == n:
-        if d == s:
-            cnt += 1
+ans = 0
+def go(cnt,cost):
+    global ans
+    if cnt == n:
+        if cost == s:
+            ans += 1
         return
-    func(d,k+1)
-    func(d+arr[k],k+1)
+    go(cnt+1,cost)
+    go(cnt+1,cost+arr[cnt])
+go(0,0)
 
-
-func(0,0)
 if s == 0:
-    cnt-=1
-print(cnt)
+    ans -= 1
+print(ans)

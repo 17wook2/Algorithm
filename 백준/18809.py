@@ -49,9 +49,6 @@ def bfs():
                     ans += 1
     return ans
 
-
-
-
 for c1 in combinations(range(len(spread)),g+r):
     for c2 in combinations(range(g+r), r):
         selected_r = []

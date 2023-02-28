@@ -1,19 +1,24 @@
+import math
 n = int(input())
-arr = []
+graph = []
 for i in range(n):
-    arr.append(list(map(int,input().split())))
-ans = 999999999
-def tsp(start,depth,visited):
+    row = list(map(int,input().split()))
+    graph.append(row)
+visited = [0]*n
+ans = math.inf
+def go(start,cost,cnt):
     global ans
-    if depth == n-1:
-        if arr[start][0] != 0:
-            ans = min(ans,sum(visited) + arr[start][0])
+    if cnt == n-1:
+        if graph[start][0] != 0:
+            ans = min(ans,cost+graph[start][0])
         return
     for i in range(n):
-        if i != 0 and not visited[i] and arr[start][i] != 0:
-            visited[i] = arr[start][i]
-            tsp(i,depth+1,visited)
-            visited[i] = 0
+        if i == 0: continue
+        if visited[i]: continue
+        if graph[start][i] == 0: continue
+        visited[i] = 1
+        go(i,cost + graph[start][i],cnt+1)
+        visited[i] = 0
 
-tsp(0,0,[0]*(n+1))
+go(0,0,0)
 print(ans)

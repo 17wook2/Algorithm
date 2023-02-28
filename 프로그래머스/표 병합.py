@@ -80,5 +80,5 @@ def solution(commands):
                 answer.append(arr[r_ref][c_ref])
 
     return answer
-
+ㅂ
 

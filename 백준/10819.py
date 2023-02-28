@@ -1,14 +1,12 @@
 from itertools import permutations
+import math
 n = int(input())
 arr = list(map(int,input().split()))
-ans = 0
-def func(array):
-    x = 0
+combi = permutations([i for i in range(n)],n)
+ans = -math.inf
+for comb in combi:
+    s = 0
     for i in range(n-1):
-        x += abs(array[i] - array[i+1])
-    return x
-
-for i in permutations(arr, n):
-    tmp = func(i)
-    ans = max(ans,tmp)
+        s += abs(arr[comb[i]]-arr[comb[i+1]])
+    ans = max(ans,s)
 print(ans)

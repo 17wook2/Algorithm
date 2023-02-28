@@ -1,27 +1,27 @@
 from collections import deque
-tc = int(input())
-def bfs(sx,sy,ex,ey):
-    q = deque([])
-    q.append((sx,sy))
-    visited = [[-1]*n for i in range(n)]
-    visited[sx][sy] = 0
+t = int(input())
+def bfs():
+    q = deque()
+    q.append((sx,sy,0))
+    visited = [[0]*n for i in range(n)]
     while q:
-        x,y = q.popleft()
+        x,y,cnt = q.popleft()
         if x == ex and y == ey:
-           print(visited[ex][ey])
-           return
+            return cnt
         for i in range(8):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0 <= nx < n and 0 <= ny < n and visited[nx][ny] == -1:
-                visited[nx][ny] = visited[x][y] + 1
-                q.append((nx,ny))
+            if nx < 0 or nx >= n or ny < 0 or ny >= n: continue
+            if visited[nx][ny]: continue
+            visited[nx][ny] = 1
+            q.append((nx,ny,cnt+1))
 
-
-for _ in range(tc):
+for _ in range(t):
     n = int(input())
-    start = list(map(int,input().split()))
-    end = list(map(int,input().split()))
+    sx,sy = list(map(int,input().split()))
+    ex,ey = list(map(int,input().split()))
+    dp = [[0]*n for i in range(n)]
     dx = [-1,-2,-2,-1,1,2,2,1]
     dy = [-2,-1,1,2,2,1,-1,-2]
-    bfs(start[0],start[1],end[0],end[1])
+    cnt = bfs()
+    print(cnt)

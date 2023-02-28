@@ -1,14 +1,11 @@
 n = int(input())
 arr = list(map(int,input().split()))
-idx = 0
-ans = []
-for i in range(n-1):
-    if arr[i] > arr[i+1]:
-        idx = i
 for i in range(n-1,0,-1):
-    if arr[idx] > arr[i]:
-        arr[idx],arr[i] = arr[i], arr[idx]
-        ans = arr[0:idx+1] + sorted(arr[idx+1:],reverse=True)
-        print(*ans)
-        exit()
+    if arr[i-1] > arr[i]:
+        for j in range(n-1,i-1,-1):
+            if arr[i-1] > arr[j]:
+                arr[i-1],arr[j] = arr[j], arr[i-1]
+                arr = arr[:i] + sorted(arr[i:], reverse = True)
+                print(*arr)
+                exit()
 print(-1)
